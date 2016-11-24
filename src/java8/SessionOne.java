@@ -9,6 +9,7 @@ import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.minBy;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.joining;
 import static java.util.Comparator.comparingDouble;
 
 public class SessionOne {
@@ -36,10 +37,10 @@ public class SessionOne {
 	public static String aTextWithNumberOfAdsByUser(){
 		List<Ad> sampleAdList = Ad.sampleAdList();
 		
-        sampleAdList.stream()
-        		.collect(groupingBy(Ad::getPublisher, counting()));
-//        		.map(ad -> String.format("El usuario %s tiene %i anuncios\n", ad.getPublisherName(), ad.getNumberOfAds())); // El usuario {nombre} tiene {numero} anuncios \n
-        
-        return null;
+        return sampleAdList.stream()
+        		.collect(groupingBy(Ad::getPublisher, counting()))
+        		.entrySet().stream()
+        		.map(entrySet -> String.format("El usuario %s tiene %i anuncios", entrySet.getKey().getPublisherName(), entrySet.getValue()))
+        		.collect(joining("\n")); // El usuario {nombre} tiene {numero} anuncios \n
     }
 }

@@ -25,5 +25,10 @@ public class User {
 
 	public boolean hasSpanishPhone() {
 		return this.phone.contains("+34");
+	}
+
+	public String getPublisherName() {
+		// TODO Auto-generated method stub
+		return null;
 	}   
 }
